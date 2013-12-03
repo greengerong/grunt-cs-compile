@@ -16,8 +16,9 @@ module.exports = function (grunt) {
     var buildCommand = function (options) {
         var project = this.data.project;
         var msBuild = options.msBuild;
-        grunt.log.error(util.format("%s %s", msBuild, project));
-        return "ls ";
+        var cmd = util.format("%s %s", msBuild, project);
+        grunt.log.error(cmd);
+        return cmd;
     };
 
     grunt.registerMultiTask('cs_compile', 'grunt build for c# compile', function () {
