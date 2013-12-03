@@ -17,15 +17,17 @@ module.exports = function (grunt) {
         var project = this.data.project;
         var msBuild = options.msBuild;
 
-        var cmd = util.format("%s %s /property:Configuration=Release;OutputPath=target", msBuild, project);
+        var cmd = util.format("%s %s /maxcpucount  /property:Configuration=Release;OutputPath=target ", msBuild, project);
         return cmd;
     };
 
     grunt.registerMultiTask('cs_compile', 'grunt build for c# compile', function () {
+    //toolsversion  http://msdn.microsoft.com/zh-Cn/library/ms164311.aspx
         var options = this.options({
             stdout: true,
             msBuild: "MSBuild.exe",
-            OutputPath:"target"
+            OutputPath:"target" ,
+            maxCPUCount : true
         });
 
         var cb = this.async();
