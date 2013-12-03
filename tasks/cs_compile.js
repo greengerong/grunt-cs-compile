@@ -17,7 +17,6 @@ module.exports = function (grunt) {
         var project = this.data.project;
         var msBuild = options.msBuild;
         var cmd = util.format("%s %s", msBuild, project);
-        grunt.log.error(cmd);
         return cmd;
     };
 
