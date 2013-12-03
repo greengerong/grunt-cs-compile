@@ -31,11 +31,9 @@ module.exports = function (grunt) {
         cs_compile: {
             custom_options: {
                 options: {
+                msBuild:"C:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe"
                 },
-                project: "some project"
-            },
-            aaaa: {
-                project: "project 2"
+                project: "E:/Project/TestSample/grunt-cs-demo/grunt-cs-demo.sln"
             }
         }
 
@@ -47,13 +45,12 @@ module.exports = function (grunt) {
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
     // Whenever the "test" task is run, first clean the "tmp" dir, then run this
     // plugin's task(s), then test the result.
     grunt.registerTask('test', ['clean', 'cs_compile']);
 
     // By default, lint and run all tests.
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['jshint','test']);
 
 };

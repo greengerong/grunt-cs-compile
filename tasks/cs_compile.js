@@ -16,14 +16,16 @@ module.exports = function (grunt) {
     var buildCommand = function (options) {
         var project = this.data.project;
         var msBuild = options.msBuild;
-        var cmd = util.format("%s %s", msBuild, project);
+
+        var cmd = util.format("%s %s /property:Configuration=Release;OutputPath=target", msBuild, project);
         return cmd;
     };
 
     grunt.registerMultiTask('cs_compile', 'grunt build for c# compile', function () {
         var options = this.options({
             stdout: true,
-            msBuild: "msbuild.exe"
+            msBuild: "MSBuild.exe",
+            OutputPath:"target"
         });
 
         var cb = this.async();
