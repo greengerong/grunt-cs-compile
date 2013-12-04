@@ -14,20 +14,23 @@ var util = require('util');
 module.exports = function (grunt) {
 
     var buildCommand = function (options) {
-        var project = this.data.project;
-        var msBuild = options.msBuild;
+        var project = this.data.project,
+            msBuild = options.msBuild,
+            maxCPU = options.maxCPU ? "/maxcpucount" : "";
 
-        var cmd = util.format("%s %s /maxcpucount  /property:Configuration=Release;OutputPath=target ", msBuild, project);
+        var cmd = util.format("%s %s ", msBuild, project);
+
+        cmd = cmd + util.format("%s /property:Configuration=Release;OutputPath=%s ", maxCPU, options.OutputPath)
         return cmd;
     };
 
     grunt.registerMultiTask('cs_compile', 'grunt build for c# compile', function () {
-    //toolsversion  http://msdn.microsoft.com/zh-Cn/library/ms164311.aspx
+        //http://msdn.microsoft.com/zh-Cn/library/ms164311.aspx
         var options = this.options({
             stdout: true,
             msBuild: "MSBuild.exe",
-            OutputPath:"target" ,
-            maxCPUCount : true
+            OutputPath: "target",
+            maxCPU: true
         });
 
         var cb = this.async();
