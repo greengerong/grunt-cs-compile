@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 
         var cmd = util.format("%s %s ", msBuild, project);
 
-        cmd = cmd + util.format("%s /property:Configuration=Release;OutputPath=%s ", maxCPU, options.OutputPath)
+        cmd = cmd + util.format("%s /property:Configuration=Release;OutputPath=%s ", maxCPU, options.OutputPath);
         return cmd;
     };
 
@@ -36,8 +36,8 @@ module.exports = function (grunt) {
         var cb = this.async();
         var cmd = buildCommand.bind(this)(options);
         var cp = exec(cmd, {}, function (err, stdout, stderr) {
-            if (err) {
-                grunt.fatal(err);
+            if (err || stderr) {
+                grunt.fatal(err || stderr);
             }
             cb();
         }.bind(this));
